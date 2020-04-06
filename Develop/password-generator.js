@@ -1,41 +1,49 @@
-// page loads: ALERT introducing the user to the idea of picking password complexity criteria 
 
-var engageUser = alert("Need a password generated?? You've come to the right place!! We'll start by asking you a series of questions to determine your Password Complexity Criteria!");
+//start
+window.setTimeout(function () {
 
-//var PROMPT for password length
+    //user PROMPT for desired length (come in from prompt as a string)
+    var passwordLength = prompt("PASSWORD LENGTH: pick a number from 8-128 for required password length: ");
+    console.log(passwordLength);
 
-var lengthChoice = prompt("a STANDARD password is 8 characters, a LONG password is 15 characters; Do you choose 8 or 15 for your character length, please input you selection!"); 
-     
-// var PROMPT for password complexity: lowercase included
+    //user PROMPT for user selected character type, comes in from prompt as a string
+    var passwordChar = prompt("PASSWORD CHARACTER: pick a character type: special, numeric, uppercase, lowercase ");
+    console.log(passwordChar);
 
-var useLowerCase = prompt(" Would you like to use LOWERCASE letters in your password complexity? Please respond 'yes' or 'no': "); 
+    //CONVERT string from passwordLength into an integer
+    var passwordLength;
+    var requiredLength = parseInt(passwordLength);
+    console.log(requiredLength);
 
-// var PROMPT for password complexity: uppercase included
+    //DECLARE FUNCTION 
+    function generateRandomPassword() {
+        //USE IF/ELSE to do evaluation of stored values
+        var useChar = "";
+        if (passwordChar === "lowercase") {
+            useChar = "abcdefghijklmnopqrstuvwxyz";
+        } else if (passwordChar === "uppercase") {
+            useChar = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        } else if (passwordChar === "numeric") {
+            useChar = "0123456789";
+        } else if (passwordChar === "special") {
+            useChar = " !\"#$%&'()*+,-./:;<=>?@[\]^_`{|}~";
+        }
+        console.log(useChar);
 
-var useUpperCase = prompt(" Would you like to use UPPERCASE letters in your password complexity? Please respond 'yes' or 'no': "); 
+        //EMPTY STRING
+        var randomPassword = "";
+        //FOR LOOP on required length of password
+        for (var i = 0; i < requiredLength.length; i++) {
+            //picks a character within charSet at index of random number
+            randomPassword += useChar.charAt(Math.floor(Math.random() * useChar.length));
+        }
+        return randomPassword;
+        console.log(randomPassword);
+    }
+    alert(generateRandomPassword());
 
-// var PROMPT for password complexity: special char included
-
-var useSpecialChar = prompt(" Would you like to use SPECIAL CHARACTERS in your password complexity? Please respond 'yes' or 'no': "); 
-
-//system sends: ALERT to the user to tell them to click the <generate password> button to get their randomly generated password
-
-var clickButton = alert("Click the Generate Password button below to get a randomly generated password based on your criteria");
-
-//user clicks <generate password button> - and system concatenates the following:
-    //user input for lengthChoice returned above
-    //user input for useLowerCase returned above
-    //user input for useUpperCase returned above
-    //user input for useSpecialChar returned above
+}, 500);
 
 
- // Add event listener to generate button
-//generateBtn.addEventListener("click", writePassword);   
+// generateBtn.addEventListener("click", writePassword);   
 
-//system uses concatenated data to loops through the password character storage array and selects items which meet the criteria popping them off and pushing them into a password generating array 
-
-var passwordCriteria = ['1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '!', '#', '$', '%', '&', '*', '+', '?, ', '@']
-
-//selected array items go into the password generating array
-
-// and a math funtion is applied to the password generating array to generate a random password
